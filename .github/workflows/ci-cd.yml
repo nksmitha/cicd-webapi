@@ -10,7 +10,6 @@ on:
       - main
 
 jobs:
-
   build:
 
     runs-on: ubuntu-latest
@@ -33,3 +32,12 @@ jobs:
 
     - name: Run Tests
       run: dotnet test --no-build --configuration Release
+
+    - name: Publish Application
+      run: dotnet publish -c Release -o ./publish
+
+    - name: Upload Build Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: dotnet-app
+        path: ./publish
